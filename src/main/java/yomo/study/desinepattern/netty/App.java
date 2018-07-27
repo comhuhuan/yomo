@@ -1,4 +1,4 @@
-package study.desinepattern.netty;
+package yomo.study.desinepattern.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -9,7 +9,6 @@ import io.netty.handler.codec.socks.SocksMessageEncoder;
 import io.netty.handler.codec.socksx.v5.Socks5InitialRequestDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import lee.study.TempMethod.TempTestImpl;
 
 /**
  * Hello world!
@@ -34,8 +33,6 @@ public class App {
 
 
     public static void main(String[] args) {
-        //new App().run();
-        TempTestImpl tempTest = new TempTestImpl();
-        tempTest.play();
+
     }
 }

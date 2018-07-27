@@ -1,4 +1,8 @@
-package study.desinepattern.netty;
+package yomo.study.desinepattern.netty;
+
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.codec.socks.*;
 
 /**
  * <p>Title:SocksServerHandler
@@ -25,13 +29,13 @@ public class SocksServerHandler extends ChannelInboundHandlerAdapter {
             case AUTH:
                 ctx.pipeline().addFirst("cmdDecoder", new SocksCmdRequestDecoder());
                 //直接成功
-                ctx.pipeline().write(new SocksAuthResponse( SocksAuthStatus.SUCCESS));
+                ctx.pipeline().write(new SocksAuthResponse(SocksAuthStatus.SUCCESS));
                 break;
             case CMD:
                 SocksCmdRequest req = (SocksCmdRequest) msg1;
                 if (req.cmdType() == SocksCmdType.CONNECT) {
                     //添加处理连接的handler
-                    ctx.pipeline().addLast("SocksServerConnectHandler", new  SocksServerConnectHandler());
+                    ctx.pipeline().addLast("SocksServerConnectHandler", new SocksServerConnectHandler());
                     ctx.pipeline().remove(this);
                 } else {
                     ctx.channel().close();

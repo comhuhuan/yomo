@@ -1,4 +1,4 @@
-package study.desinepattern.netty;
+package yomo.study.desinepattern.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -27,7 +27,6 @@ public class InSocksHandler extends ChannelInboundHandlerAdapter {
 
 
     class OutboundHandler extends ChannelInboundHandlerAdapter {
-
 
 
         private final SocketChannel inboundChannel;
