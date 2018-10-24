@@ -1,4 +1,4 @@
-package study.desinepattern.Template;
+package yomo.study.desinepattern.Template;
 
 /**
  * <p>Title:FootBoll

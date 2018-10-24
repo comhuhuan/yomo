@@ -1,4 +1,4 @@
-package study.desinepattern.Template;
+package yomo.study.desinepattern.Template;
 
 /**
  * <p>Title:TempTest
@@ -15,7 +15,7 @@ public abstract class TempTest {
 
     public abstract void playBaskt();
 
-    public  final void play() {
+    public final void play() {
         playBaskt();
         playPingPong();
         playFootBoll();
