@@ -29,7 +29,5 @@ public class ReflectionTest {
         inSocksHandlerClass.isPrimitive();
         Method[] methods = InSocksHandler.class.getMethods();
 
-\
-
     }
 }
