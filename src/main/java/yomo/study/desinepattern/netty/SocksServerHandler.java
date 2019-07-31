@@ -9,7 +9,7 @@ import io.netty.handler.codec.socks.*;
  * <p>Description:
  * <p>Modified History:
  *
- * @author CVTE
+ * @author HH
  * @date 2018/7/25 16:48
  */
 public class SocksServerHandler extends ChannelInboundHandlerAdapter {

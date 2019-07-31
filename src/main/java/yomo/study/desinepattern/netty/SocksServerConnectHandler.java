@@ -17,7 +17,7 @@ import java.net.InetSocketAddress;
  * <p>Description:
  * <p>Modified History:
  *
- * @author CVTE
+ * @author HH
  * @date 2018/7/25 17:51
  */
 public class SocksServerConnectHandler extends ChannelInboundHandlerAdapter {

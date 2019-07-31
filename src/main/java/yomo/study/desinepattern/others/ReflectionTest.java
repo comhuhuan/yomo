@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
 
 /**
  * <p>Title:ReflectionTest
- * <p>Description:
+ * <p>Description:反射
  * <p>Modified History:
  *
  * @author HH
@@ -29,13 +29,7 @@ public class ReflectionTest {
         inSocksHandlerClass.isPrimitive();
         Method[] methods = InSocksHandler.class.getMethods();
 
-//        for (Method method : methods) {
-//            method.getAnnotatedReturnType();
-//            String name = method.getName();
-//
-//            System.out.println(name);
-
-//        }
+\
 
     }
 }

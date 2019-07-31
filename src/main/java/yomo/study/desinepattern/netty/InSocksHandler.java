@@ -10,7 +10,7 @@ import java.nio.channels.SocketChannel;
  * <p>Description:
  * <p>Modified History:
  *
- * @author CVTE
+ * @author HH
  * @date 2018/7/26 9:48
  */
 public class InSocksHandler extends ChannelInboundHandlerAdapter {
