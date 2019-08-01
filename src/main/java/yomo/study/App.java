@@ -8,6 +8,7 @@ import com.alibaba.fastjson.asm.Type;
 import com.sun.javafx.collections.MappingChange;
 import redis.clients.jedis.Jedis;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public class App {
     public static void main(String[] args) throws InterruptedException {
         Jedis jedis = new Jedis("10.10.12.40", 6379);
         jedis.auth("midea123456");
+        Map<Object, Object> abc = new HashMap<>();
         while (true) {
 
             System.out.println(jedis.pttl("token_ebs") / 1000);
@@ -25,7 +27,10 @@ public class App {
             System.out.println(jedis.get("token_ebs"));
             jedis.del("token_ebs");
             // System.out.println(jedis.get("token_ebs"));
+
+
         }
+
 
 //
 //

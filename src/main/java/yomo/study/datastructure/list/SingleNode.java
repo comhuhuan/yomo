@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor(staticName="data")
 public class SingleNode {
-    public Node next;
+    public SingleNode next;
     public int data;
 
     public SingleNode(int data) {
