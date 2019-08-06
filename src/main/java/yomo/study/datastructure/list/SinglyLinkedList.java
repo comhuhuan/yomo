@@ -285,10 +285,10 @@ public class SinglyLinkedList {
 
     /**
      * 实现链表的反转
-     *
+     * 单向链表的反转问题 https://www.cnblogs.com/Java3y/p/8664874.html
      * @param node 链表的头节点
      */
-    // TODO: 2019/8/1  HH
+    // TODO: 2019/8/1  HH https://blog.csdn.net/xyh269/article/details/70238501
     public static SingleNode reverseLinkList(SingleNode node) {
 
         SingleNode prev;

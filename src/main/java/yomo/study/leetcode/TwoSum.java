@@ -82,6 +82,7 @@ public class TwoSum {
     /**
      * https://leetcode-cn.com/problems/add-two-numbers/solution/liang-shu-xiang-jia-by-leetcode/
      * 两数相加  链表的遍历
+     *
      * @param node1
      * @param node2
      * @return
@@ -113,25 +114,35 @@ public class TwoSum {
         return dummyHead.next;
     }
 
-    // /**
-    //  * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
-    //  * @param s
-    //  * @return
-    //  */
-    // public int lengthOfLongestSubstring(String s) {
-    //     for (int i = 0; i < s.length(); i++) {
-    //         char c = s.charAt(i);
-    //         Set<Character> set = new HashSet<>();
-    //
-    //
-    //
-    //
-    //
-    //
-    //     }
-    //
-    // }
+    /**
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 暴力破解
+     * 算法的本质是什么？ 思维的方式？
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j < s.length(); j++) {
+                if (unique(s, i, j)) {
+                    ans = Math.max(ans, j - i);
+                }
+            }
+        }
+        return ans;
+    }
 
+    private boolean unique(String s, int i, int j) {
+        Set<Character> set = new HashSet<>();
+        for (; i < j; i++) {
+            char c = s.charAt(i);
+            if (set.contains(c)) {
+                return false;
+            }
+            set.add(c);
+        }
+        return true;
+    }
 
 
 }
