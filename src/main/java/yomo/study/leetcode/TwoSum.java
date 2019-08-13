@@ -1,8 +1,10 @@
 package yomo.study.leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import com.sun.org.apache.bcel.internal.generic.IFNULL;
+import yomo.study.datastructure.list.Node;
+
+import javax.swing.tree.TreeNode;
+import java.util.*;
 
 /**
  * <p>Title:TwoSum
@@ -16,7 +18,7 @@ public class TwoSum {
 
     public static void main(String[] args) throws IllegalAccessException {
         int[] ints = {1, 2, 3, 5, 6, 87, 4, 5};
-
+        lengthOfLonges3tSubstring("sadsfdsfadsfasdfsadfklkjijlkjskadfljlkasjdfhdgadsjfkdsaf");
         int target = 8;
         int[] sum = twoSum(ints, target);
         System.out.println(Arrays.toString(sum));
@@ -117,6 +119,7 @@ public class TwoSum {
     /**
      * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 暴力破解
      * 算法的本质是什么？ 思维的方式？
+     *
      * @param s
      * @return
      */
@@ -144,5 +147,85 @@ public class TwoSum {
         return true;
     }
 
+
+    public boolean Find(int target, int[][] array) {
+        int length = array.length - 1;
+        int i = 0;
+        while (length >= 0 && i < array[0].length) {
+            if (array[length][i] > target) {
+                length--;
+            } else if (array[length][i] < target) {
+                i++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+    /**
+     * 滑动窗口 set 解最长无重复字符串   时间复杂度为 O(2n) 空间复杂度为O(min(m,n))
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLonges2tSubstring(String s) {
+        int i = 0, j = 0, n = s.length(), ans = 0;
+
+        Set<Object> set = new HashSet<>();
+        while (i < n && j < n) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                ans = Math.max(ans, j - 1);
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 滑动窗口map实现
+     * @param s
+     * @return
+     */
+    public static int lengthOfLonges3tSubstring(String s) {
+        int i = 0, j = 0, n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (; j <n ; j++) {
+            if (map.containsKey(s.charAt(j))) {
+                i = Math.max(map.get(s.charAt(j)), i);
+            }
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);
+        }
+        return ans;
+    }
+
+    public Node mergeTrees(Node t1, Node t2) {
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        Node node = new Node(t1.data + t2.data);
+        node.next = mergeTrees(t1.next, t2.next);
+        node.Pre = mergeTrees(t1.Pre, t2.Pre);
+
+        return node;
+
+    }
+
+
+
+
+    public int hammingDistance(int x, int y) {
+        //bitCount 数出整数二进制下 1 的个数
+        //1^0 = 1 ,0^1 =1 ,0^0 = 0 ,1^1 = 0
+        return Integer.bitCount(x^y);
+    }
 
 }
