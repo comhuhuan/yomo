@@ -1,6 +1,10 @@
 package yomo.study.datastructure.list;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+
 /**
  * <p>Title:SinglyLinkedList
  * <p>Description:单向链表
@@ -266,12 +270,13 @@ public class SinglyLinkedList {
 
     /**
      * 通过递归从尾到头输出单链表
-     *
+     * <p>
      * 思路：
      * （1）先反转单链表，再正序输出。（麻烦，不用）
      * （2）从头到尾遍历链表，每经过一个节点的时候，把该节点放到一个栈中，当遍历完整个链表后，再从栈顶开始输出节点的值。（需要维护一个额外的栈空间，麻烦）
      * （3）递归方法。既然想到了栈来实现这个函数，而递归本质上就是一个栈结构，所以考虑用递归来实现。要实现反过来输出链表，每访问到一个节点的时候，先递归输出它后面的节点，再输出该节点自身，即可实现从尾到头输出单链表。具体实现见代码。
      * --------------------
+     *
      * @param head 头节点
      */
     // TODO: 2019/8/1  通过调用
@@ -286,6 +291,7 @@ public class SinglyLinkedList {
     /**
      * 实现链表的反转
      * 单向链表的反转问题 https://www.cnblogs.com/Java3y/p/8664874.html
+     *
      * @param node 链表的头节点
      */
     // TODO: 2019/8/1  HH https://blog.csdn.net/xyh269/article/details/70238501
@@ -303,5 +309,106 @@ public class SinglyLinkedList {
         return prev;
 
     }
+
+    public SingleNode reverseList2(SingleNode head) {
+        SingleNode prev = null;
+        SingleNode curr = head;
+
+        while (curr != null) {
+            // 保存下一个节点
+            SingleNode nextTemp = curr.next;
+            // 将当前头节点的下一个节点指向 “上一个节点”
+            curr.next = prev;
+            // 将当前头节点设为为上一个节点
+            prev = curr;
+
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            Integer count = map.get(num);
+            count = count == null ? 1 : ++count;
+            map.put(num, count);
+        }
+        for (Integer integer : map.keySet()) {
+            Integer count = map.get(integer);
+            if (count == 1) {
+                return integer;
+            }
+        }
+        return -1;
+
+    }
+
+    public int singleNumber2(int[] nums) {
+        HashSet<Integer> objects = new HashSet<>();
+        for (int num : nums) {
+            boolean add = objects.add(num);
+            if (!add) {
+                objects.remove(num);
+            }
+        }
+        return (Integer) objects.toArray()[0];
+    }
+
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
+     * 投票算法 牛逼
+     * Boyer-Moore
+     * Boyer-Moore还有一个优点，那就是可以使用并行算法实现。其基本思想为对原数组采用分治的方法，把数组划分成很多段(每段大小可以不相同)，在每段中计算出candidate-count二元组，然后得到最终结果。
+     *
+     * @param nums
+     * @return
+     */
+    public int majorityElement2(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+
+
+    public SingleNode mergeTwoLists(SingleNode node1, SingleNode node2) {
+        // 重新建一个别表
+        // maintain an unchanging reference to node ahead of the return node.
+
+        SingleNode singleNode = new SingleNode(-1);
+        SingleNode prev = singleNode;
+
+        while (node1.next != null && node2 != null) {
+            if (node1.data <= node2.data) {
+                prev.next = node1;
+                node1 = node1.next;
+            } else {
+                prev.next = node2;
+                prev = node2.next;
+            }
+        }
+        prev.next = node1 == null ? node2 : node1;
+
+        return singleNode.next;
+    }
+
+
+
+
+
+
 
 }

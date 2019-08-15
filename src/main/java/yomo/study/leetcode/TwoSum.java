@@ -1,9 +1,7 @@
 package yomo.study.leetcode;
 
-import com.sun.org.apache.bcel.internal.generic.IFNULL;
 import yomo.study.datastructure.list.Node;
 
-import javax.swing.tree.TreeNode;
 import java.util.*;
 
 /**
@@ -188,13 +186,14 @@ public class TwoSum {
 
     /**
      * 滑动窗口map实现
+     *
      * @param s
      * @return
      */
     public static int lengthOfLonges3tSubstring(String s) {
         int i = 0, j = 0, n = s.length(), ans = 0;
         Map<Character, Integer> map = new HashMap<>();
-        for (; j <n ; j++) {
+        for (; j < n; j++) {
             if (map.containsKey(s.charAt(j))) {
                 i = Math.max(map.get(s.charAt(j)), i);
             }
@@ -220,12 +219,27 @@ public class TwoSum {
     }
 
 
-
-
     public int hammingDistance(int x, int y) {
         //bitCount 数出整数二进制下 1 的个数
         //1^0 = 1 ,0^1 =1 ,0^0 = 0 ,1^1 = 0
-        return Integer.bitCount(x^y);
+        return Integer.bitCount(x ^ y);
     }
+
+
+    /**
+     * 树的最大深度
+     * @param root
+     * @return
+     */
+    public int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return Math.max(maxDepth(root.next), maxDepth(root.Pre)) + 1;
+        }
+
+
+    }
+
 
 }
