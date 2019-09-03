@@ -14,27 +14,6 @@ import java.util.*;
  */
 public class TwoSum {
 
-    public static void main(String[] args) throws IllegalAccessException {
-        int[] ints = {1, 2, 3, 5, 6, 87, 4, 5};
-        lengthOfLonges3tSubstring("sadsfdsfadsfasdfsadfklkjijlkjskadfljlkasjdfhdgadsjfkdsaf");
-        int target = 8;
-        int[] sum = twoSum(ints, target);
-        System.out.println(Arrays.toString(sum));
-
-
-        ListNode listNode = new ListNode(1);
-        listNode.next = new ListNode(3);
-        listNode.next = new ListNode(5);
-
-
-        ListNode listNode2 = new ListNode(1);
-        listNode2.next = new ListNode(3);
-        listNode2.next = new ListNode(5);
-
-        ListNode listNode1 = addTwoNumbers(listNode, listNode2);
-        System.out.println(listNode1);
-    }
-
 
     /**
      * 暴力破解
@@ -133,6 +112,26 @@ public class TwoSum {
         return ans;
     }
 
+
+    /**
+     * 镜像二叉树
+     *
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return isMirror(root, root);
+    }
+
+    public boolean isMirror(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) return true;
+        if (t1 == null || t2 == null) return false;
+        return (t1.val == t2.val)
+                && isMirror(t1.right, t2.left)
+                && isMirror(t1.left, t2.right);
+    }
+
+
     private boolean unique(String s, int i, int j) {
         Set<Character> set = new HashSet<>();
         for (; i < j; i++) {
@@ -228,6 +227,7 @@ public class TwoSum {
 
     /**
      * 树的最大深度
+     *
      * @param root
      * @return
      */
@@ -241,5 +241,315 @@ public class TwoSum {
 
     }
 
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+
+    /**
+     * 把二叉搜索树转化为累加树
+     *
+     * @param root
+     * @return
+     */
+
+    public TreeNode convertBST(TreeNode root) {
+        if (root != null) {
+            dfs(root, 0);
+        }
+        return root;
+    }
+
+    private int dfs(TreeNode node, int sum) {
+        if (node == null) {
+            return sum;
+        }
+        // 获取右边节点的和
+        sum = dfs(node.right, sum);
+        // 暂存当前节点
+        int nodeValue = node.val;
+        //更新当前节点的值
+        node.val += sum;
+        //暂存的值加上右边节点的值带到左边节点
+        sum += nodeValue;
+
+        sum = dfs(node.left, sum);
+
+        return sum;
+    }
+
+    /**
+     * 指针跟随法  把0元素移到最后
+     *
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                swap(nums, i, k++);
+            }
+        }
+    }
+
+    private void swap(int[] nums, int first, int second) {
+        if (first == second) {
+            return;
+        }
+        nums[second] = nums[first];
+        nums[first] = 0;
+    }
+
+
+    /**
+     * 将数组元素对应为索引的位置加n todo
+     * 遍历加n后的数组，若数组元素值小于等于n，则说明数组下标值不存在，即消失的数字
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> objects = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            int index = (nums[i] - 1) % nums.length;
+            nums[index] += nums.length;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= nums.length)
+                objects.add(i + 1);
+        }
+        System.out.println(Arrays.toString(objects.toArray()));
+        return objects;
+
+    }
+
+    int pathnumber;
+
+    public int pathSum(TreeNode root, int sum) {
+        if (root == null) return 0;
+        Sum(root, sum);
+        pathSum(root.left, sum);
+        pathSum(root.right, sum);
+        return pathnumber;
+    }
+
+
+    public void Sum(TreeNode root, int sum) {
+        if (root == null) return;
+        sum -= root.val;
+        if (sum == 0) {
+            pathnumber++;
+        }
+        Sum(root.left, sum);
+        Sum(root.right, sum);
+    }
+
+    public static int maxProfit(int[] prices) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;
+            }
+        }
+        return maxprofit;
+    }
+
+
+    /**
+     * 这道题的思想很简单：“以空间换时间”，使用辅助栈是常见的做法。
+     * 思路 1：数据栈和辅助栈在任何时候都同步不需要额外的条件判断;(可能导致内存占用过多)
+     */
+    class MinStack {
+        // 数据栈
+        private Stack<Integer> data;
+        // 辅助栈
+        private Stack<Integer> helper;
+
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack() {
+            data = new Stack<>();
+            helper = new Stack<>();
+        }
+
+        public void push(int x) {
+            // 数据栈和辅助栈一定会增加元素
+            data.add(x);
+            // 和栈顶的元素比较,如果比栈顶元素小,直接放 ,如果大的话,就重新再入一遍栈顶元素
+            if (helper.isEmpty() || helper.peek() >= x) {
+                helper.add(x);
+            } else {
+                helper.add(helper.peek());
+            }
+        }
+
+        public void pop() {
+            // 两个栈都得 pop
+            if (!data.isEmpty()) {
+                helper.pop();
+                data.pop();
+            }
+        }
+
+        public int top() {
+            if (!data.isEmpty()) {
+                return data.peek();
+            }
+            throw new RuntimeException("栈中元素为空，此操作非法");
+        }
+
+        public int getMin() {
+            if (!helper.isEmpty()) {
+                return helper.peek();
+            }
+            throw new RuntimeException("栈中元素为空，此操作非法");
+        }
+
+    }
+
+
+    /**
+     * 思路二 : 辅助栈和数据栈不同步
+     */
+    public class MinStack2 {
+
+        // 数据栈
+        private Stack<Integer> data;
+        // 辅助栈
+        private Stack<Integer> helper;
+
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack2() {
+            data = new Stack<>();
+            helper = new Stack<>();
+        }
+
+        // 思路 2：辅助栈和数据栈不同步
+        // 关键 1：辅助栈的元素空的时候，必须放入新进来的数
+        // 关键 2：新来的数小于或者等于辅助栈栈顶元素的时候，才放入（特别注意这里等于要考虑进去）
+        // 关键 3：出栈的时候，辅助栈的栈顶元素等于数据栈的栈顶元素，才出栈，即"出栈保持同步"就可以了
+
+        public void push(int x) {
+            // 辅助栈在必要的时候才增加
+            data.add(x);
+            // 关键 1 和 关键 2
+            if (helper.isEmpty() || helper.peek() >= x) {
+                helper.add(x);
+            }
+        }
+
+        public void pop() {
+            // 关键 3：data 一定得 pop()
+            if (!data.isEmpty()) {
+                // 注意：声明成 int 类型，这里完成了自动拆箱，从 Integer 转成了 int，因此下面的比较可以使用 "==" 运算符
+                // 参考资料：https://www.cnblogs.com/GuoYaxiang/p/6931264.html
+                // 如果把 top 变量声明成 Integer 类型，下面的比较就得使用 equals 方法
+                int top = data.pop();
+                if (top == helper.peek()) {
+                    helper.pop();
+                }
+            }
+        }
+
+        public int top() {
+            if (!data.isEmpty()) {
+                return data.peek();
+            }
+            throw new RuntimeException("栈中元素为空，此操作非法");
+        }
+
+        public int getMin() {
+            if (!helper.isEmpty()) {
+                return helper.peek();
+            }
+            throw new RuntimeException("栈中元素为空，此操作非法");
+        }
+
+    }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode pA = headA, pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
+    }
+
+    // public int maxSubArray(int[] nums) {
+    //     int k = 0;
+    //     int sum = 0;
+    //     for (int i = 0; i < nums.length; i++) {
+    //         if (nums[k] > nums[i]) {
+    //
+    //             k++;
+    //         }
+    //
+    //     }
+    // }
+
+
+    private int max = 0;
+
+    /**
+     * 二叉树的直径
+     * 前序递归，记录左右节点的深度，
+     * @param root
+     * @return
+     */
+    public int diameterOfBinaryTree(TreeNode root) {
+        depth(root);
+        return max;
+    }
+
+    private int depth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int depth = depth(root.left);
+        int depth1 = depth(root.right);
+        //max记录当前的最大直径
+        max = Math.max(depth + depth1, max);
+        return Math.max(depth, depth1) + 1;
+    }
+
+    public static void main(String[] args) throws IllegalAccessException {
+        int[] ints = {3, 2, 2, 5, 6, 2, 4, 5};
+        lengthOfLonges3tSubstring("sadsfdsfadsfasdfsadfklkjijlkjskadfljlkasjdfhdgadsjfkdsaf");
+        int target = 8;
+        int[] sum = twoSum(ints, target);
+        System.out.println(Arrays.toString(sum));
+
+
+        ListNode listNode = new ListNode(1);
+        listNode.next = new ListNode(3);
+        listNode.next = new ListNode(5);
+
+
+        ListNode listNode2 = new ListNode(1);
+        listNode2.next = new ListNode(3);
+        listNode2.next = new ListNode(5);
+
+        ListNode listNode1 = addTwoNumbers(listNode, listNode2);
+        System.out.println(listNode1);
+
+        System.out.println(maxProfit(ints));
+        findDisappearedNumbers(ints);
+
+
+    }
 }

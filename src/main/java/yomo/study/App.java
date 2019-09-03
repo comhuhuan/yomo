@@ -32,6 +32,9 @@ public class App {
         }
 
 
+
+
+
 //
 //
 //        jedis.set("abc", "123");
@@ -107,59 +110,15 @@ public class App {
 //        jedis.incrBy("abcd", 2);
 //        System.out.println(jedis.get("abcd"));
 //
-//        String abc = "[{\n" +
-//                "\"title\": \"业务实体\",\n" +
-//                "\"dataKey\": \"orgName\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"0\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"供应商名称\",\n" +
-//                "\"dataKey\": \"vendorName\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"1\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"物料编码\",\n" +
-//                "\"dataKey\": \"itemCode\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"2\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"物料描述\",\n" +
-//                "\"dataKey\": \"itemName\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"3\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"日期\",\n" +
-//                "\"dataKey\": \"reqDate\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"Date\",\n" +
-//                "\"NO\": \"4\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"类型\",\n" +
-//                "\"dataKey\": \"qtyType\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"5\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"数量\",\n" +
-//                "\"dataKey\": \"qty\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"6\"\n" +
-//                "}, {\n" +
-//                "\"title\": \"是否发布\",\n" +
-//                "\"dataKey\": \"released\",\n" +
-//                "\"ch\": \"1\",\n" +
-//                "\"type\": \"String\",\n" +
-//                "\"NO\": \"7\"\n" +
-//                "}]";
-//
-//        JSONArray objects = JSON.parseArray(abc);
-//
 
 
+    }
+    private static <T extends Number & Comparable<? super T>> T min(T[] values) {
+        if (values == null || values.length == 0) return null;
+        T min = values[0];
+        for (int i = 1; i < values.length; i++) {
+            if (min.compareTo(values[i]) > 0) min = values[i];
+        }
+        return min;
     }
 }
