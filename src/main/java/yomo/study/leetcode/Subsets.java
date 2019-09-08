@@ -1,12 +1,9 @@
-package yomo.study.leetcode;
-
-/**
- * <p>Title:Subsets
- * <p>Description:
- * <p>Modified History:
- *
- * @author HH
- * @date 2019/9/6 10:43
- */
-public class Subsets {
-}
+// package yomo.study.leetcode;
+//
+// import java.util.List;
+//
+// public class Subsets {
+//     public List<List<Integer>> subsets(int[] nums) {
+//
+//     }
+// }

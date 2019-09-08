@@ -1,6 +1,8 @@
 package yomo.study.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -48,7 +50,33 @@ public class Parentheses {
         return stack.isEmpty();
     }
 
+
+    public static List<String> generateParenthesis(int n) {
+        // 开始用分支 递归 回溯 必须要有一个递归函数
+        List<String> res = new ArrayList<>();
+        gen(0, 0, n, "", res);
+        return res;
+    }
+
+    private static void  gen(int left, int right, int n, String cur, List<String> res) {
+        if (left == n && right == n) {
+            res.add(cur);
+            return ;
+        }
+        if (left < n) {
+            gen(left + 1, right, n, cur + "(", res);
+        }
+        if (left > right && right < n) {
+            gen(left, right + 1, n, cur + ")", res);
+
+        }
+
+    }
+
+
     public static void main(String[] args) {
         System.out.println(isValid("{{{}}}"));
+        System.out.println(generateParenthesis(5));
+
     }
 }

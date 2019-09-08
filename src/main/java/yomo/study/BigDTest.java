@@ -1,7 +1,5 @@
 package yomo.study;
 
-import sun.applet.Main;
-
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class BigDTest {
 
 
         String a = "6.146";
-        Double d= Double.parseDouble(a);
+        Double d = Double.parseDouble(a);
         DecimalFormat df = new DecimalFormat("0.00");
         String s = df.format(d);
 
@@ -45,12 +43,10 @@ public class BigDTest {
 //        }
 
 
-
     }
 
 
-
-    private void checkDrAndCrInfo( ){
+    private void checkDrAndCrInfo() {
 
     }
 
