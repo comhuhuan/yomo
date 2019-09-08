@@ -9,7 +9,7 @@ public class SolveSudoku {
     private static boolean helper(char[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                if (  board[i][j] == '.') {
+                if (board[i][j] == '.') {
 
 
                     for (char c = '1'; c <= '9'; c++) {
@@ -46,6 +46,33 @@ public class SolveSudoku {
         }
         return true;
     }
+
+
+    public boolean isValidSudoku(char[][] board) {
+        if (board==null) return false;
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                for (char c = 1; c <= '9'; c++) {
+                    for (int k = 0; k < 9; k++) {
+                        if (board[row][k] != '.' && board[row][k] == c) {
+                            return false;
+                        }
+                        if (board[k][col] != '.' && board[k][col] == c) {
+                            return false;
+                        }
+                        if (board[3 * (row / 3) + k / 3][3 * (col / 3) + k % 3] != '.' && board[3 * (row / 3) + k / 3][3 * (col / 3) + k % 3] == c) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return true;
+    }
+
+
+
 
     public static void main(String[] args) {
 
