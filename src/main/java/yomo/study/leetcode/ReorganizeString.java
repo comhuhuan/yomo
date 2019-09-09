@@ -6,6 +6,7 @@ package yomo.study.leetcode;
  * <p>Modified History:
  * 1.超过一半的字符数不能排序
  * 2.
+ *
  * @author HH
  * @date 2019/9/9 9:07
  */
@@ -27,7 +28,7 @@ public class ReorganizeString {
                 max_length = arr[c - 'a'];
             }
         }
-        if (max_length>(max_length+1)/2) {
+        if (max_length > (length + 1) / 2) {
             return " ";
         }
         char[] res = new char[S.length()];
@@ -39,15 +40,13 @@ public class ReorganizeString {
                 arr[i]--;
                 odd += 2;
             }
-            while(arr[i]>0){
-                res[even] = (char)(i + 'a');
+            while (arr[i] > 0) {
+                res[even] = (char) (i + 'a');
                 arr[i]--;
                 even += 2;
             }
         }
 
         return new String(res);
-
-
     }
 }
