@@ -100,6 +100,17 @@ public class Trie {
         trie.startsWith("app"); // 返回 true
         trie.insert("app");
         trie.search("app");     // 返回 true
+
+        int a = 100;
+        while (a != 0) {
+            a = a & (a - 1);
+            System.out.println(a);
+        }
+
+        int i = Integer.bitCount(100);
+        System.out.println(i);
+
+
     }
 
 
