@@ -1,4 +1,4 @@
-package yomo.study.desinepattern.netty;
+package yomo.study.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

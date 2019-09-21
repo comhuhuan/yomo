@@ -1,6 +1,6 @@
 package yomo.study.desinepattern.others;
 
-import yomo.study.desinepattern.netty.InSocksHandler;
+import yomo.study.netty.InSocksHandler;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
