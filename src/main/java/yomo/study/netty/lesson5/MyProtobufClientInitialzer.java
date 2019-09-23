@@ -1,0 +1,28 @@
+package yomo.study.netty.lesson5;
+
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
+
+/**
+ * @program: yomo
+ * @description:
+ * @author: hh
+ * @create: 2019-09-22 22:41
+ **/
+public class MyProtobufClientInitialzer extends ChannelInitializer<SocketChannel> {
+
+    @Override
+    protected void initChannel(SocketChannel ch) throws Exception {
+        ChannelPipeline pipeline = ch.pipeline();
+        pipeline.addLast(new ProtobufVarint32FrameDecoder());
+        pipeline.addLast(new ProtobufDecoder(DataInfo.Students.getDefaultInstance()));
+        pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
+        pipeline.addLast(new ProtobufEncoder());
+        pipeline.addLast(new MyProtobufClientHandler());
+    }
+}

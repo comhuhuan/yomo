@@ -1,0 +1,11 @@
+syntax = "proto2";
+// protoc --java_out=/Users/yomo/IdeaProjects/yomo/src/main/java -I=./ Student.proto
+package yomo.study.netty.lesson4;
+option optimize_for = SPEED;
+option java_package = "yomo.study.netty.lesson5";
+option java_outer_classname = "DataInfo";
+message Students {
+    required string name = 1;
+    optional int32 age = 2;
+    optional string address = 3;
+}

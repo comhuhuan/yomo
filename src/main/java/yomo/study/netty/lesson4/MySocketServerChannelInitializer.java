@@ -18,7 +18,6 @@ public class MySocketServerChannelInitializer extends ChannelInitializer<SocketC
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        //以字符分割的解码器  解码后字符消失  发送给对方要自己加字符 贼坑；
         pipeline.addLast(new HttpServerCodec())
                 .addLast(new ChunkedWriteHandler())
                 .addLast(new HttpObjectAggregator(8192))
